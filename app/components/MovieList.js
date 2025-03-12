@@ -1,26 +1,38 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import MovieCard from "./MovieCard";
 import MovieDetails from "./MovieDetails";
-
-const movies = [
-  {
-    id: 1,
-    title: "Kung Fu Panda 4",
-    imageUrl: "/images/panda.jpg",
-    rating: 10,
-    releaseDate: "March 6, 2024",
-    overview:
-      "Po must choose a worthy successor to become the next Dragon Warrior when a mysterious villain emerges with a dangerous weapon that threatens to destroy the world.",
-  },
-  // ...add more movies as needed
-];
+import { fetchMovies } from "../api/movieApi";
 
 function MovieList() {
   const [selectedMovie, setSelectedMovie] = useState(null);
+  const [movies, setMovies] = useState([]);
+
+  useEffect(() => {
+    async function loadMovies() {
+      try {
+        const data = await fetchMovies();
+        setMovies(data.results);
+      } catch (error) {
+        console.error("Error fetching movies:", error);
+      }
+    }
+    loadMovies();
+  }, []);
+
+  useEffect(() => {
+    if (selectedMovie) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [selectedMovie]);
 
   return (
-    <div className=" px-12 mt-8 grid grid-cols-4 gap-6 max-lg:px-8 max-md:px-4 max-lg:grid-cols-3 max-md:grid-cols-2 max-sm:grid-cols-1">
+    <div className="px-12 mt-8 grid grid-cols-4 gap-6 max-lg:px-8 max-md:px-4 max-lg:grid-cols-3 max-md:grid-cols-2 max-sm:grid-cols-1">
       {movies.map((movie) => (
         <MovieCard
           key={movie.id}
