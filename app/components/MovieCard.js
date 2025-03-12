@@ -1,9 +1,12 @@
 import { Heart, Star } from "lucide-react";
 import React from "react";
 
-function MovieCard() {
+function MovieCard({ movie, onClick }) {
   return (
-    <div className=" relative bg-white rounded-lg shadow-lg overflow-hidden transition-transform hover:scale-105">
+    <div
+      className=" relative bg-white rounded-lg shadow-lg overflow-hidden transition-transform hover:scale-105"
+      onClick={onClick}
+    >
       <img
         src="/images/panda.jpg"
         alt="image"
