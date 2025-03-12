@@ -11,7 +11,7 @@ function navbar() {
             Movie Explorer
           </h1>
         </div>
-        <button className=" flex items-center px-4 py-2 rounded-lg bg-gray-200 text-gray-700">
+        <button className=" flex items-center px-4 py-2 rounded-lg bg-gray-200 text-gray-700 cursor-pointer">
           <Heart className=" h-5 w-5 mr-2" /> Favorites
         </button>
       </div>
