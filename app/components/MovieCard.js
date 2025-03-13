@@ -7,14 +7,15 @@ function MovieCard({ movie, onClick }) {
 
   const [isFavorite, setIsFavorite] = useState(false);
 
-  // Check localStorage for this movie's favorite status
+  // Check localStorage for this movie's favorite status (storing full movie objects)
   useEffect(() => {
     const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-    const favorited = favorites.includes(movie.id);
+    // Use .some() to see if a movie with the same id exists
+    const favorited = favorites.some((fav) => fav.id === movie.id);
     setIsFavorite(favorited);
   }, [movie.id]);
 
-  // Toggle favorite status and update localStorage
+  // Toggle favorite status and update localStorage with the full movie object
   const handleFavoriteToggle = (e) => {
     // Prevent click from triggering the card's onClick
     e.stopPropagation();
@@ -22,11 +23,11 @@ function MovieCard({ movie, onClick }) {
     let updatedFavorites;
 
     if (isFavorite) {
-      // If already a favorite, remove it from the favorites list
-      updatedFavorites = favorites.filter((id) => id !== movie.id);
+      // Remove the movie object by filtering out the one with the same id
+      updatedFavorites = favorites.filter((fav) => fav.id !== movie.id);
     } else {
-      // Otherwise, add the movie's id to favorites
-      updatedFavorites = [...favorites, movie.id];
+      // Add the entire movie object to favorites
+      updatedFavorites = [...favorites, movie];
     }
     // Save the updated favorites list to localStorage
     localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
