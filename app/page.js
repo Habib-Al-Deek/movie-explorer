@@ -13,7 +13,6 @@ export default function Home() {
   const [movies, setMovies] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
 
-  // Update movies based on the search query
   useEffect(() => {
     async function loadMovies() {
       try {

@@ -4,8 +4,7 @@ export async function fetchMovies() {
     headers: {
       accept: "application/json",
       // For production apps, move this token to an environment variable
-      Authorization:
-        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjYjM1YzJkMmU3OGYzYmZhZjEyYjM4MzZlMWFhOWE5ZiIsIm5iZiI6MTc0MTc2NzYyNC44NzYsInN1YiI6IjY3ZDE0M2M4NmVjZWM1ZjM5YTgxNTM2OCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.vT_xMWAFcuzIeV0HR4SmKm0whlP0AuaRb16XlYooO7s",
+      Authorization: `Bearer ${process.env.NEXT_PUBLIC_TMDB_BEARER}`,
     },
   };
 
@@ -29,16 +28,13 @@ export async function fetchMovies() {
   }
 }
 
-// api/movieApi.js
-
 export async function searchMovies(query) {
   const options = {
     method: "GET",
     headers: {
       accept: "application/json",
       // For production, store the token in an environment variable
-      Authorization:
-        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjYjM1YzJkMmU3OGYzYmZhZjEyYjM4MzZlMWFhOWE5ZiIsIm5iZiI6MTc0MTc2NzYyNC44NzYsInN1YiI6IjY3ZDE0M2M4NmVjZWM1ZjM5YTgxNTM2OCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.vT_xMWAFcuzIeV0HR4SmKm0whlP0AuaRb16XlYooO7s",
+      Authorization: `Bearer ${process.env.NEXT_PUBLIC_TMDB_BEARER}`,
     },
   };
 
