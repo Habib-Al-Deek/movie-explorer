@@ -1,9 +1,9 @@
 import React from "react";
 import { Film, Heart } from "lucide-react";
 
-function navbar() {
+function Navbar() {
   return (
-    <header className=" bg-white shadow">
+    <header className="sticky top-0 z-50 bg-white shadow">
       <div className=" flex justify-between px-24 py-6 max-lg:15 max-md:px-12 max-sm:px-4">
         <div className=" flex items-center">
           <Film className=" h-8 w-8 text-blue-500 mr-4 max-sm:mr-2" />
@@ -19,4 +19,4 @@ function navbar() {
   );
 }
 
-export default navbar;
+export default Navbar;

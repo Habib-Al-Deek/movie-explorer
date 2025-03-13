@@ -1,7 +1,7 @@
 import React from "react";
 import { Search } from "lucide-react";
 
-function searchBar() {
+function SearchBar() {
   return (
     <form className="w-full max-w-2xl mx-auto">
       <div className="relative">
@@ -16,4 +16,4 @@ function searchBar() {
   );
 }
 
-export default searchBar;
+export default SearchBar;
