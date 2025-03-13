@@ -30,7 +30,7 @@ export default function Home() {
     loadMovies();
   }, [searchQuery]);
 
-  // Disable scrolling when modals are open
+  // Disable scrolling when popups are open
   useEffect(() => {
     if (showFavorites || selectedMovie) {
       document.body.style.overflow = "hidden";
@@ -47,10 +47,16 @@ export default function Home() {
       <Navbar onFavoritesClick={() => setShowFavorites(true)} />
       <main className="px-8 py-8 max-lg:px-4">
         <SearchBar onSearchChange={setSearchQuery} />
-        <MovieList
-          movies={movies}
-          onSelectMovie={(movie) => setSelectedMovie(movie)}
-        />
+        {searchQuery.trim() !== "" && movies.length === 0 ? (
+          <div className="text-center mt-8">
+            <p className="text-gray-500 text-lg">No movies were found</p>
+          </div>
+        ) : (
+          <MovieList
+            movies={movies}
+            onSelectMovie={(movie) => setSelectedMovie(movie)}
+          />
+        )}
       </main>
       {showFavorites && (
         <FavoritesPopup

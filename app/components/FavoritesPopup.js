@@ -4,7 +4,7 @@ import { X } from "lucide-react";
 function FavoritesPopup({ onClose, onMovieSelect }) {
   const [favorites, setFavorites] = useState([]);
 
-  // Load favorites from localStorage when the component mounts
+  // Load favorites from localStorage
   useEffect(() => {
     const storedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
     setFavorites(storedFavorites);
@@ -26,7 +26,6 @@ function FavoritesPopup({ onClose, onMovieSelect }) {
           {favorites.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {favorites.map((movie) => (
-                // When a favorite is clicked, call onMovieSelect with the movie and close the popup.
                 <div
                   key={movie.id}
                   onClick={() => {

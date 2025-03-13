@@ -10,7 +10,6 @@ function MovieCard({ movie, onClick }) {
   // Check localStorage for this movie's favorite status (storing full movie objects)
   useEffect(() => {
     const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-    // Use .some() to see if a movie with the same id exists
     const favorited = favorites.some((fav) => fav.id === movie.id);
     setIsFavorite(favorited);
   }, [movie.id]);

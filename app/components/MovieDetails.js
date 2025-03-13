@@ -9,7 +9,6 @@ function MovieDetails({ movie, onBack }) {
       <div className="m-auto w-full  p-4 sm:p-6 md:p-8">
         <div className="bg-white rounded-lg shadow-xl">
           <div className="p-6">
-            {/* Back button */}
             <div className="flex items-center justify-between mb-6">
               <button
                 className="inline-flex items-center text-gray-600 hover:text-gray-900 transition-colors cursor-pointer"
@@ -20,7 +19,6 @@ function MovieDetails({ movie, onBack }) {
               </button>
             </div>
 
-            {/* Main grid */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div>
                 <img
@@ -63,7 +61,6 @@ function MovieDetails({ movie, onBack }) {
                   </div>
                 </div>
               </div>
-              {/* End of grid columns */}
             </div>
           </div>
         </div>
