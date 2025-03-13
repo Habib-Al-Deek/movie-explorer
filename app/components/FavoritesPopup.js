@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { X } from "lucide-react";
 
-function FavoritesPopup({ onClose }) {
+function FavoritesPopup({ onClose, onMovieSelect }) {
   const [favorites, setFavorites] = useState([]);
 
   // Load favorites from localStorage when the component mounts
@@ -26,7 +26,15 @@ function FavoritesPopup({ onClose }) {
           {favorites.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {favorites.map((movie) => (
-                <div key={movie.id} className=" p-4 rounded-lg shadow-2xl">
+                // When a favorite is clicked, call onMovieSelect with the movie and close the popup.
+                <div
+                  key={movie.id}
+                  onClick={() => {
+                    onMovieSelect(movie);
+                    onClose();
+                  }}
+                  className="cursor-pointer p-4 rounded-lg shadow-2xl transition-transform hover:scale-105"
+                >
                   <img
                     src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                     alt={movie.title}

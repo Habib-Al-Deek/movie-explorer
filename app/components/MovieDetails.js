@@ -3,12 +3,13 @@ import React from "react";
 
 function MovieDetails({ movie, onBack }) {
   const posterUrl = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
+
   return (
-    // Changed "absolute" to "fixed", added inset-0 and z-50 to overlay the entire screen
-    <div className="fixed inset-0 z-50 bg-gray-100 flex items-center justify-center max-md:h-fit">
-      <div className="px-16 py-12 max-md:px-8">
+    <div className="fixed inset-0 z-50 bg-gray-100 flex overflow-y-auto">
+      <div className="m-auto w-full  p-4 sm:p-6 md:p-8">
         <div className="bg-white rounded-lg shadow-xl">
           <div className="p-6">
+            {/* Back button */}
             <div className="flex items-center justify-between mb-6">
               <button
                 className="inline-flex items-center text-gray-600 hover:text-gray-900 transition-colors cursor-pointer"
@@ -18,6 +19,8 @@ function MovieDetails({ movie, onBack }) {
                 Back
               </button>
             </div>
+
+            {/* Main grid */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div>
                 <img
@@ -60,7 +63,7 @@ function MovieDetails({ movie, onBack }) {
                   </div>
                 </div>
               </div>
-              {/* End of grid columns change */}
+              {/* End of grid columns */}
             </div>
           </div>
         </div>
