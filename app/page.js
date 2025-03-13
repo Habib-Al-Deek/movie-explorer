@@ -1,16 +1,37 @@
 "use client";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
 import SearchBar from "./components/SearchBar";
 import MovieList from "./components/MovieList";
 import FavoritesPopup from "./components/FavoritesPopup";
 import MovieDetails from "./components/MovieDetails";
+import { fetchMovies, searchMovies } from "./api/movieApi";
 
 export default function Home() {
   const [showFavorites, setShowFavorites] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState(null);
+  const [movies, setMovies] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
 
-  // Disable scrolling on the body when the favorites popup or movie details is open
+  // Update movies based on the search query
+  useEffect(() => {
+    async function loadMovies() {
+      try {
+        if (searchQuery.trim() !== "") {
+          const data = await searchMovies(searchQuery);
+          setMovies(data.results);
+        } else {
+          const data = await fetchMovies();
+          setMovies(data.results);
+        }
+      } catch (error) {
+        console.error("Error fetching movies:", error);
+      }
+    }
+    loadMovies();
+  }, [searchQuery]);
+
+  // Disable scrolling when modals are open
   useEffect(() => {
     if (showFavorites || selectedMovie) {
       document.body.style.overflow = "hidden";
@@ -26,8 +47,11 @@ export default function Home() {
     <div className="h-full bg-gray-100">
       <Navbar onFavoritesClick={() => setShowFavorites(true)} />
       <main className="px-8 py-8 max-lg:px-4">
-        <SearchBar />
-        <MovieList />
+        <SearchBar onSearchChange={setSearchQuery} />
+        <MovieList
+          movies={movies}
+          onSelectMovie={(movie) => setSelectedMovie(movie)}
+        />
       </main>
       {showFavorites && (
         <FavoritesPopup
